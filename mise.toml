@@ -1,0 +1,14 @@
+[settings]
+disable_backends = ["ubi", "asdf"]
+lockfile = true
+
+[tools]
+uv = "0.13.7"
+# Audited 2026-11-19: 21 packages, wheels only, no known vulnerabilities.
+"pypi:copier" = { version = "9.19.1", python = "3.14.10" }
+
+[env]
+PYTHONPATH = false
+PYTHONHOME = false
+PIP_REQUIRE_VIRTUALENV = "true"
+UV_PYTHON_DOWNLOADS = "never"
