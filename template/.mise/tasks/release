@@ -28,6 +28,9 @@ branch=$(git symbolic-ref --short -q HEAD || true)
 # An untracked source would be built into the release, since application.fam globs *.c*.
 [ -z "$(git status --porcelain)" ] || refuse "the worktree is not clean"
 
+# The Flipper Apps Catalog takes no app without a screenshot.
+ls asset/screenshot/*.png > /dev/null 2>&1 || refuse "asset/screenshot/ holds no .png from qFlipper"
+
 dir=$(mktemp -d)
 trap 'rm -rf "$dir"' EXIT
 # Without these, an interrupted run would skip the EXIT trap and leave release/<name> behind.

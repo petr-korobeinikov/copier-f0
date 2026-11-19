@@ -89,6 +89,10 @@ jobs:
 
           commit=$(GH_TOKEN=$REPOSITORY_TOKEN gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_REF" --jq .sha)
 
+          # In name order, each path a JSON string, which YAML reads as it is.
+          screenshots=$(GH_TOKEN=$REPOSITORY_TOKEN gh api "repos/$GITHUB_REPOSITORY/contents/asset/screenshot?ref=$commit" \
+              --jq '[.[] | select(.type == "file" and (.name | endswith(".png")))] | sort_by(.name) | .[] | "  - " + (.path | tojson)')
+
           cat > manifest.yml <<EOF
           sourcecode:
             type: git
@@ -97,6 +101,8 @@ jobs:
               commit_sha: $commit
           description: "@.catalog/description.md"
           changelog: "@.catalog/changelog.md"
+          screenshots:
+          $screenshots
           EOF
           content=$(base64 -w 0 manifest.yml)
 
