@@ -7,3 +7,5 @@ locked = true
 
 [tools]
 "aqua:gittower/git-flow-next" = "2.1.0"
+"aqua:j178/prek" = "0.5.10"
+"aqua:koalaman/shellcheck" = "0.11.0"
