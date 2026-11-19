@@ -38,8 +38,14 @@ home=$(mktemp -d)
 trap 'rm -rf "$home"' EXIT
 
 HOME="$home" contained ufbt update --branch "$FLIPPER_SDK_VERSION"
-# Any SCons command fetches the toolchain; `-h` is the one that needs no application.fam.
-HOME="$home" contained ufbt -h > /dev/null
+
+# The SDK ships this file with a trailing blank line, and `ufbt lint` copies it over the
+# tracked one: only the source can keep the repository's single final newline.
+format="$UFBT_HOME/current/scripts/ufbt/project_template/.clang-format"
+contents=$(cat "$format")
+printf '%s\n' "$contents" > "$format"
+
+HOME="$home" contained ufbt
 version=$(HOME="$home" contained ufbt status version)
 
 if [ -n "$(ls -A "$home")" ]; then

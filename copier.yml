@@ -1,2 +1,31 @@
 _subdirectory: template
 _preserve_symlinks: true
+
+# fbt packs the name into 32 ASCII bytes, the last kept for the NUL
+# (scripts/fbt/elfmanifest.py:42), and it sits in a Python and a C string literal.
+app_name:
+    type: str
+    help: The app's name in the Apps menu
+    validator: >-
+        {% if not (app_name | regex_search('^(?! )[ -!#-\\[\\]-~]{1,31}(?<! )$')) %}
+        Use 1 to 31 printable ASCII characters, with no " or \ and no space at either end.
+        {% endif %}
+
+# fbt's own pattern for an appid (scripts/fbt/appmanifest.py:35).
+app_id:
+    type: str
+    help: The app's id, its file name on the device
+    default: "{{ app_name | lower | regex_replace('[^a-z0-9]+', '_') | trim('_') }}"
+    validator: >-
+        {% if not (app_id | regex_search('^[a-z0-9_]+$')) %}
+        Use lowercase letters, digits and underscores.
+        {% endif %}
+
+# fbt installs the app under apps/<category>/ (scripts/fbt_tools/fbt_extapps.py:210).
+app_category:
+    type: str
+    help: The Apps menu folder the app goes into, as Bluetooth or Tools
+    validator: >-
+        {% if not (app_category | regex_search('^[A-Za-z0-9][A-Za-z0-9 -]*$')) %}
+        Use letters, digits, spaces and dashes.
+        {% endif %}

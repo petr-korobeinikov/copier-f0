@@ -44,8 +44,10 @@ context: |
   ## Platform
 
   The deterministic core includes no Flipper SDK header and is tested on the
-  host; platform-specific code carries only what genuinely cannot be shared,
-  and each such entry is a decision worth naming in the design.
+  host; `view` above it only renders the state it is handed. Platform-specific
+  code carries only what genuinely cannot be shared, and each such entry is a
+  decision worth naming in the design. The host tests compile with the system
+  `cc`, unpinned, and run on `assert` and `test/test.h`, with no framework.
 
   The toolchain is pinned in `mise.toml` with every version in full, and
   `mise.lock` is written only by mise - never deleted, never recreated by
@@ -58,10 +60,52 @@ context: |
   then refactor with the suite green. A task is never marked complete while
   a test is failing or skipped; report the failure instead.
 
+  The code is idiomatic C at the level of nginx as Igor Sysoev wrote it:
+  strict, tidy and uniform, read left to right and top to bottom. The style
+  rules are Flipper's: `CODING_STYLE.md` for names, its `.clang-format` for
+  the look, and `.editorconfig` holds what an editor can enforce.
+
+  A `switch` over an enum names every enumerator and has no `default:`:
+  both builds run `-Wall -Werror`, so `-Wswitch` stops them at an
+  enumerator a switch leaves out. What a function returns for a value no
+  case names follows the switch.
+
+  A table indexed by an enum takes its length from the enum's `…MAX`,
+  never from its rows. An enum a `switch` is over has no `…MAX`, which
+  every such switch would have to name, and indexes no table: a row left
+  out reads as zero with no warning, where a case left out stops the
+  build.
+
+  A named constant is a `static const` of its type, since a `#define` is
+  text with no type of its own. A `#define` names a constant only where C
+  requires an integer constant expression, which a `const` object is not,
+  as an array's length.
+
   One file, one screen of code, one task, stated in one sentence with no
   "and". Outgrowing a screen is a signal to look for the seam, never a license
   to split by moving code to a second file. Linters and numeric limits are
   chosen as the project grows.
+
+  Sources live in `src/`, one folder per layer - `src/core/`, `src/ui/` and
+  `src/platform/` - and tests in `test/`. There is no `include/`: a header
+  sits in its layer's folder. An include crosses a layer downward only and
+  relative to its file, as `"../core/keymap.h"`.
+
+  A header is the interface: a `.h` holds only the public contract, and
+  everything internal stays in the `.c`, raw data behind functions. A
+  dependency points at a header rather than at whatever fulfills it: the core
+  names what it needs, and platform-specific code supplies it, never the
+  reverse. A header is written for one consumer - a second consumer that needs
+  half of it is asking for a second header.
+
+  Types are `PascalCase` and in the singular, functions and variables
+  `snake_case`. A file's name prefixes its content: `keymap.h` holds `Keymap`
+  and `keymap_*`, and `alloc` and `free` open and close an instance's life. An
+  implementation puts what it rests on after its header's name
+  (`transport_bluetooth.c`), a test's double `fake` (`transport_fake.c`).
+  Identifiers are spelled in full. A short form survives only where it is the
+  domain's own name (`id`, `url`, `hid`) or C's own idiom (`i` for a loop
+  counter), and a name is never shortened to fit a line.
 
   English is American English, its spelling and its words, in everything
   the project names or writes: identifiers, files and folders, branch, change
