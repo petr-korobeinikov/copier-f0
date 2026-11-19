@@ -33,6 +33,13 @@ git flow feature finish <id> --squash-message "<the subject its proposal names>"
 
 Browse specs and changes with `mise exec -- openspec view`.
 
+To install the agent skills into `.claude/skills/` in a fresh clone,
+or to update them:
+
+```shell
+mise exec -- npx skills add petr-korobeinikov/skills --skill '*' --copy --agent claude-code -y
+```
+
 ## Commits
 
 A commit message is a Conventional Commit, in English,
