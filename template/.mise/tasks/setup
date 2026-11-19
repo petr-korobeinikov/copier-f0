@@ -1,0 +1,8 @@
+#!/bin/sh
+#MISE description="Set up git-flow from the committed .gitflow, at the project's birth and in every fresh clone"
+set -eu
+
+# `init --force` lays down main and develop and leaves .gitflow untouched;
+# `config sync` copies the committed model into .git/config, which a clone does not carry.
+git flow init --force --preset=classic --defaults
+git flow config sync
