@@ -118,7 +118,7 @@ unless it leaves every spec true.
 - **A `feature/` or `bugfix/` branch may be rebased onto `develop` and force-pushed;
   no other branch ever is.**
 
-## Commits
+## Commits and releases
 
 Commit messages follow Conventional Commits, in English:
 `type(scope): description`.
@@ -138,6 +138,21 @@ No line credits an AI agent or model in any form —
 no `Co-Authored-By:` trailer for a machine address,
 no "Generated with" line;
 every other trailer is allowed.
+
+A release is named by a counter, `MAJOR.MINOR`:
+the first is `0.1`, and each one after it raises `MINOR` by one.
+A `.fap` stores only these two numbers,
+and the Flipper Apps Catalog takes an update only under a higher version,
+so a third part would go unseen.
+`mise run release 0.1`, run on a clean `develop`, cuts the release whole:
+it starts `release/0.1`, makes the commit `chore: release 0.1`, the branch's last,
+finishes the branch and pushes `main`, `develop` and the tag atomically.
+The tag is `v` followed by the name —
+`v0.1`, put by the finish, as `tagPrefix` is `v` in `.gitflow`.
+`fap_version` in `application.fam` carries the name, never the `v`,
+and is set by that commit,
+which also regenerates `CHANGELOG.md` with git-cliff;
+nothing else writes it.
 
 ## Generated files
 
