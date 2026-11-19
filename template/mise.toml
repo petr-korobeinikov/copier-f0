@@ -6,6 +6,8 @@ lockfile = true
 locked = true
 
 [tools]
+act = "0.2.95"
+actionlint = "1.7.12"
 node = "26.13.1"
 uv = "0.13.7"
 "aqua:gittower/git-flow-next" = "2.1.0"

@@ -1,6 +1,7 @@
 .ufbt/
 dist/
 .vscode/
+.act/
 # A user-wide `.idea` ignore would hide the folder, and with it every file named below.
 !.idea/
 .idea/*
