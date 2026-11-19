@@ -5,5 +5,8 @@ App(
     entry_point="main_entry",
     stack_size=2 * 1024,
     fap_category="{{ app_category }}",
+    fap_description="{{ app_description }}",
+    fap_author="{{ app_author }}",
+    fap_weburl="{{ app_weburl }}",
     sources=["*.c*", "!test"],
 )

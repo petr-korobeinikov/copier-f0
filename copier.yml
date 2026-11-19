@@ -29,3 +29,29 @@ app_category:
         {% if not (app_category | regex_search('^[A-Za-z0-9][A-Za-z0-9 -]*$')) %}
         Use letters, digits, spaces and dashes.
         {% endif %}
+
+# The catalog's short description. Kept out: what a Python string literal can't hold as typed,
+# and what the catalog's Markdown filter refuses, as .catalog/description.md repeats it.
+app_description:
+    type: str
+    help: One line on what the app does, for the Flipper Apps Catalog
+    validator: >-
+        {% if not (app_description | regex_search('^(?! )[^"\\\\`<&\\[\\]\\x00-\\x1f\\x7f]+(?<! )$')) %}
+        Use one line with no " \ ` < & [ ] and no space at either end.
+        {% endif %}
+
+app_author:
+    type: str
+    help: The app's author, as the Flipper Apps Catalog shows it
+    validator: >-
+        {% if not (app_author | regex_search('^(?! )[^"\\\\\\x00-\\x1f\\x7f]+(?<! )$')) %}
+        Use one line with no " or \ and no space at either end.
+        {% endif %}
+
+app_weburl:
+    type: str
+    help: The app's web page, as its repository
+    validator: >-
+        {% if not (app_weburl | regex_search('^https://[^\\s"\\\\]+$')) %}
+        Use an https:// URL with no spaces, " or \.
+        {% endif %}

@@ -38,7 +38,7 @@ undo() {
     status=$?
     rm -rf "$dir"
     git reset -q --hard
-    git clean -fq -- CHANGELOG.md
+    git clean -fq -- CHANGELOG.md .catalog/changelog.md
     git checkout -q develop
     git branch -q -D "release/$name"
     exit "$status"
@@ -59,11 +59,14 @@ awk -v line="    fap_version=\"$name\"," '
 cat "$dir/application.fam" > application.fam
 
 git-cliff --tag "v$name" --output CHANGELOG.md
+# --prepend fails on a missing file, as it is before the first release.
+touch .catalog/changelog.md
+git-cliff --config .catalog/cliff.toml --unreleased --tag "v$name" --prepend .catalog/changelog.md
 
 # The build is the one check the release commit can break.
 ufbt
 
-git add application.fam CHANGELOG.md
+git add application.fam CHANGELOG.md .catalog/changelog.md
 git commit -m "chore: release $name"
 
 # From here on nothing is undone: `git flow finish --continue` resumes the finish, and the

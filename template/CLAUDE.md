@@ -151,8 +151,9 @@ The tag is `v` followed by the name —
 `v0.1`, put by the finish, as `tagPrefix` is `v` in `.gitflow`.
 `fap_version` in `application.fam` carries the name, never the `v`,
 and is set by that commit,
-which also regenerates `CHANGELOG.md` with git-cliff;
-nothing else writes it.
+which also regenerates `CHANGELOG.md` with git-cliff
+and puts the release's section on top of `.catalog/changelog.md`;
+nothing else writes either file.
 
 ## Generated files
 

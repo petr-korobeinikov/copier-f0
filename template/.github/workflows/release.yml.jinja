@@ -57,9 +57,68 @@ jobs:
         env:
           GH_TOKEN: {% raw %}${{ github.token }}{% endraw %}
 
+  flipper-apps-catalog:
+    needs: draft
+    runs-on: ubuntu-24.04
+    environment: flipper-apps-catalog
+    steps:
+      - run: |
+          set -eu
+          upstream=flipperdevices/flipper-application-catalog
+          fork=$GITHUB_REPOSITORY_OWNER/flipper-application-catalog
+          prefix=$GITHUB_REPOSITORY_OWNER/{{ app_id }}_
+          name=${GITHUB_REF_NAME#v}
+          manifest="applications/{{ app_category }}/{{ app_id }}/manifest.yml"
+
+          gh repo sync "$fork" --branch main
+          main=$(gh api "repos/$fork/commits/heads/main" --jq .sha)
+
+          # set -e ignores a failed substitution in a for list, which would then walk the error body.
+          refs=$(gh api "repos/$fork/git/matching-refs/heads/$prefix" --jq '.[].ref')
+          for ref in $refs; do
+              # The fork's token stays with the fork.
+              open=$(GH_TOKEN=$REPOSITORY_TOKEN gh api \
+                  "repos/$upstream/pulls?state=open&head=$GITHUB_REPOSITORY_OWNER:${ref#refs/heads/}" --jq length)
+              # Deleting the head of an open pull request closes it.
+              if [ "$open" -eq 0 ]; then
+                  gh api --method DELETE "repos/$fork/git/$ref"
+              fi
+          done
+
+          gh api "repos/$fork/git/refs" --silent -f ref="refs/heads/$prefix$name" -f sha="$main"
+
+          commit=$(GH_TOKEN=$REPOSITORY_TOKEN gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_REF" --jq .sha)
+
+          cat > manifest.yml <<EOF
+          sourcecode:
+            type: git
+            location:
+              origin: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git
+              commit_sha: $commit
+          description: "@.catalog/description.md"
+          changelog: "@.catalog/changelog.md"
+          EOF
+          content=$(base64 -w 0 manifest.yml)
+
+          # A 404 prints its body as the output, so the exit status alone tells the file is there.
+          if blob=$(gh api "repos/$fork/contents/$manifest?ref=$main" --jq .sha); then
+              gh api --method PUT "repos/$fork/contents/$manifest" --silent \
+                  -f message="Update $APP_NAME to $name" -f content="$content" \
+                  -f branch="$prefix$name" -f sha="$blob"
+          else
+              gh api --method PUT "repos/$fork/contents/$manifest" --silent \
+                  -f message="Add $APP_NAME $name" -f content="$content" \
+                  -f branch="$prefix$name"
+          fi
+        env:
+          GH_TOKEN: {% raw %}${{ secrets.FLIPPER_APPS_CATALOG_TOKEN }}{% endraw %}
+          REPOSITORY_TOKEN: {% raw %}${{ github.token }}{% endraw %}
+          # From here, not the script: the shell would expand a $ or a ` in the name.
+          APP_NAME: "{{ app_name }}"
+
   # Last: publishing locks the tag and the assets.
   publish:
-    needs: draft
+    needs: flipper-apps-catalog
     runs-on: ubuntu-24.04
     permissions:
       contents: write
