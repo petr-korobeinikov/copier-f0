@@ -44,7 +44,9 @@ the commit lands on `develop` through the hooks.
 ## Update a project
 
 Commit everything in the project first: Copier refuses to update a dirty tree.
-Then, from the clone of this repository:
+The project's `.copier-answers.yml` records the template as `.`,
+which Copier resolves from the current folder,
+so run the update from the root of the clone of this repository:
 
 ```shell
 GIT_CONFIG_COUNT=1 \
