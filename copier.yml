@@ -69,3 +69,13 @@ docs_url:
         {% if not (docs_url | regex_search('^https://[^\\s"\\\\]+/$')) %}
         Use an https:// URL ending in / with no spaces, " or \.
         {% endif %}
+
+# Asked, so the answers file keeps the year and `copier update` leaves the notice as it was.
+copyright_year:
+    type: str
+    help: The year in the copyright notice
+    default: "{{ '%Y' | strftime }}"
+    validator: >-
+        {% if not (copyright_year | regex_search('^[0-9]{4}$')) %}
+        Use a four-digit year.
+        {% endif %}

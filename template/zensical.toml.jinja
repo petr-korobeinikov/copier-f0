@@ -5,6 +5,10 @@ site_url = "{{ docs_url }}"
 # fbt gathers `*.c*` and `ufbt lint` rejects folders such as `quick-start`; both skip dot-folders.
 site_dir = ".site"
 repo_url = "{{ app_weburl }}"
+copyright = """
+<a href="{{ app_weburl }}/blob/develop/LICENSE">GPL-3.0</a>.
+Copyright (C) {{ copyright_year }} {{ app_author | e }}.
+"""
 
 nav = [
   { "Home" = "index.md" },

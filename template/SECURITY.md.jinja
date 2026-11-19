@@ -1,0 +1,35 @@
+# Security Policy
+
+## Supported Versions
+
+Only the latest published release receives security fixes.
+
+## Reporting a Vulnerability
+
+Please report security vulnerabilities privately
+through GitHub's [private vulnerability reporting][report].
+Do not open a public issue for security problems.
+
+You can expect an initial response within a few days.
+This is a personal project,
+so fixes are best-effort.
+
+[report]: {{ app_weburl }}/security/advisories/new
+
+## Debugging Hardware
+
+The WiFi Devboard's GDB port and HTTP API have no authentication,
+and its API hands out the password of the network it joined.
+Take the board off the device after a session.
+
+## Dependency Security Posture
+
+The shipped artifact is a single `.fap`,
+built against the SDK pinned in `mise.toml`.
+The app has no third-party dependencies of its own.
+
+The Flipper toolchain bundles Python packages with known advisories,
+which cannot be patched here.
+They run only on the developer's machine at build time,
+over this repository's own files,
+and reach neither the `.fap` nor the device.
