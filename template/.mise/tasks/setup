@@ -1,6 +1,11 @@
 #!/bin/sh
-#MISE description="Set up git-flow and the prek hooks, at the project's birth and in every fresh clone"
+#MISE description="Set up git-flow, the prek hooks and the pinned Flipper SDK, at the project's birth and in every fresh clone"
 set -eu
+
+if [ "$(uname -s)" != Darwin ]; then
+    echo "setup: sandbox-exec exists on Darwin only" >&2
+    exit 1
+fi
 
 # `init --force` lays down main and develop and leaves .gitflow untouched;
 # `config sync` copies the committed model into .git/config, which a clone does not carry.
@@ -9,3 +14,41 @@ git flow config sync
 
 # Wires the pre-commit and commit-msg hooks prek.toml names into .git/hooks.
 prek install
+
+# The SDK is deployed under a write-deny sandbox: writes land only in the project and temp.
+root=$(pwd -P)
+profile='(version 1)(allow default)(deny file-write*)
+(allow file-write* (subpath (param "root")) (subpath "/private/tmp")
+  (subpath "/private/var/folders") (subpath "/dev"))'
+
+contained() {
+    sandbox-exec -D root="$root" -p "$profile" "$@"
+}
+
+# A sandbox that stopped denying would let every check below pass.
+probe="$HOME/.ufbt_setup_probe"
+if contained /usr/bin/touch "$probe" 2>/dev/null; then
+    rm -f "$probe"
+    echo "setup: sandbox-exec no longer denies writes" >&2
+    exit 1
+fi
+
+# macOS 27 logs no denials, so a swallowed one shows only as a write to this HOME.
+home=$(mktemp -d)
+trap 'rm -rf "$home"' EXIT
+
+HOME="$home" contained ufbt update --branch "$FLIPPER_SDK_VERSION"
+# Any SCons command fetches the toolchain; `-h` is the one that needs no application.fam.
+HOME="$home" contained ufbt -h > /dev/null
+version=$(HOME="$home" contained ufbt status version)
+
+if [ -n "$(ls -A "$home")" ]; then
+    echo "setup: wrote to HOME:" >&2
+    ls -A "$home" >&2
+    exit 1
+fi
+
+if [ "$version" != "$FLIPPER_SDK_VERSION" ]; then
+    echo "setup: SDK $version deployed, $FLIPPER_SDK_VERSION pinned" >&2
+    exit 1
+fi
