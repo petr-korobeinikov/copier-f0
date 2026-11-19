@@ -55,3 +55,17 @@ app_weburl:
         {% if not (app_weburl | regex_search('^https://[^\\s"\\\\]+$')) %}
         Use an https:// URL with no spaces, " or \.
         {% endif %}
+
+# GitHub Pages serves a project's site at https://<owner>.github.io/<repo>/.
+# The llmstxt plugin refuses to build without it (zensical/config.py:1942).
+docs_url:
+    type: str
+    help: The docs site's address, where GitHub Pages serves it
+    default: >-
+        {% if app_weburl | regex_search('^https://github\\.com/[^/]+/[^/]+$') -%}
+        https://{{ app_weburl | regex_replace('^https://github\\.com/([^/]+)/.*$', '\\1') | lower }}.github.io/{{ app_weburl | regex_replace('^https://github\\.com/[^/]+/', '') }}/
+        {%- endif %}
+    validator: >-
+        {% if not (docs_url | regex_search('^https://[^\\s"\\\\]+/$')) %}
+        Use an https:// URL ending in / with no spaces, " or \.
+        {% endif %}

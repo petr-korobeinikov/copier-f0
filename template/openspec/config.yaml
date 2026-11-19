@@ -94,7 +94,8 @@ context: |
   The app's pictures live in `asset/`, one folder per purpose: `asset/icon/`
   for the Apps menu's icon, `asset/image/` for what the screens draw and
   `asset/screenshot/` for the screenshots. Folder names are in the singular,
-  but for a name a tool fixes, as `.github/workflows/`.
+  but for `docs/` with the folders under it, and for a name a tool fixes, as
+  `.github/workflows/`.
 
   A header is the interface: a `.h` holds only the public contract, and
   everything internal stays in the `.c`, raw data behind functions. A
@@ -132,8 +133,8 @@ context: |
 
   ## Housekeeping
 
-  A housekeeping change reads `README.md` against the tree as a task of its
-  own: a statement there outlives the change that made it true, and the next
+  A housekeeping change reads `README.md` and `docs/` against the tree as a
+  task of its own: a statement there outlives the change that made it true, and the next
   reader, often an agent, acts on it. It does not read every comment again:
   the comment rule under Engineering holds each one to its why whenever the
   code under it changes.

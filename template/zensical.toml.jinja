@@ -1,0 +1,51 @@
+[project]
+site_name = "{{ app_name }}"
+site_description = "{{ app_description }}"
+site_url = "{{ docs_url }}"
+# fbt gathers `*.c*` and `ufbt lint` rejects folders such as `quick-start`; both skip dot-folders.
+site_dir = ".site"
+repo_url = "{{ app_weburl }}"
+
+nav = [
+  { "Home" = "index.md" },
+]
+
+[project.theme]
+variant = "modern"
+custom_dir = "docs/templates"
+language = "en"
+# Off, so a page calls no Google Fonts.
+font = false
+features = [
+  "content.code.copy",
+  "navigation.instant",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.plugins.llmstxt]
+markdown_description = "{{ app_description }}"
+full_output = "llms-full.txt"
+
+[project.plugins.llmstxt.sections]
+Start = ["index.md"]
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+tables = {}
+toc.permalink = true
+pymdownx.highlight = {}
+# Without the Mermaid fence, which the theme renders from a CDN.
+pymdownx.superfences = {}
