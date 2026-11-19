@@ -1,0 +1,159 @@
+schema: spec-driven
+
+# Project context. Injected into every artifact instruction and into the
+# apply / archive operations.
+context: |
+  ## Working agreement
+
+  The reader is a peer, not a customer. No basics, no hand-holding, no restating
+  what the code already says. Name the trade-off instead of listing every
+  option. Push back on a decision that looks wrong and say why; silent
+  agreement is worse than an argument.
+
+  This project is young and most of it is undecided. A rule is written here
+  only once it has been settled, and everything absent is still open. Do not
+  invent a domain fact, a file layout or a dependency to fill a gap - propose
+  it as a decision and ask, or say plainly that the change cannot be
+  specified until that decision is made.
+
+  ## Scope
+
+  A change fits in one head and is checked in one sitting. Content that will
+  not fit the budgets under Writing means the change is split along capability
+  boundaries; a scenario is never dropped to fit.
+
+  ## Writing
+
+  Words cost the reader's time: cut words, never content.
+
+  - Concrete over descriptive: a number, a path, a type, a command or an error
+    text - not an adjective, and not a summary of one.
+  - Each fact lives in one artifact - why in the proposal, what in the spec,
+    how in the design, steps and results in the tasks - and the others point
+    to it.
+  - A decision is one bullet: the choice, the alternative it beat, and the
+    reason in one sentence.
+  - A table replaces paragraphs whenever the items share fields.
+  - No throat-clearing ("worth noting", "importantly", "in order to"), and no
+    narration of what was done - the diff shows that.
+  - Budgets, in words, for a change's artifacts: proposal 600, design 800,
+    each spec document 500, tasks 600 as planned, and three lines of notes
+    under each task once it is done. `wc -w` checks them before the plan is
+    committed; up to a tenth over passes, beyond that words are cut.
+
+  ## Platform
+
+  The deterministic core includes no Flipper SDK header and is tested on the
+  host; platform-specific code carries only what genuinely cannot be shared,
+  and each such entry is a decision worth naming in the design.
+
+  The toolchain is pinned in `mise.toml` with every version in full, and
+  `mise.lock` is written only by mise - never deleted, never recreated by
+  hand.
+
+  ## Engineering
+
+  Canonical TDD, and it binds the business logic: write the failing test,
+  watch it fail for the right reason, write the minimum code that passes,
+  then refactor with the suite green. A task is never marked complete while
+  a test is failing or skipped; report the failure instead.
+
+  One file, one screen of code, one task, stated in one sentence with no
+  "and". Outgrowing a screen is a signal to look for the seam, never a license
+  to split by moving code to a second file. Linters and numeric limits are
+  chosen as the project grows.
+
+  English is American English, its spelling and its words, in everything
+  the project names or writes: identifiers, files and folders, branch, change
+  and capability ids, specs, docs, comments, commit messages and every English
+  text a user reads - `color`, `behavior`, `dialog`, `favorite`, `license`,
+  `center`, `gray`, `canceled`, `labeled`, `initialize`, `analyze`, and
+  `check` rather than `tick`. A name the project does not own keeps its
+  owner's spelling: a library's or a platform's API, a proper name, a
+  quotation, a legal text.
+
+  A comment is written only where it is needed, and it says what the code
+  cannot: why it is written this way - the constraint it obeys, the trap it
+  avoids, the source it follows. Clear code carries none, and a comment that
+  restates what the code does is deleted, doc comments and docstrings
+  included. Code that cannot be read without one is renamed or split at its
+  seam first, and commented only if it still cannot. A directive to a
+  tool - a shebang, a linter's suppression - is code, not a comment, and
+  stays.
+
+  ## Housekeeping
+
+  A housekeeping change reads `README.md` against the tree as a task of its
+  own: a statement there outlives the change that made it true, and the next
+  reader, often an agent, acts on it. It does not read every comment again:
+  the comment rule under Engineering holds each one to its why whenever the
+  code under it changes.
+
+  A housekeeping pass opens with an audit split by dimension - names, the
+  statements comments and the README make, structure and build,
+  tests - in which each auditor only reads,
+  citing every finding by file and line with its count and the rule it
+  breaks. The reports stay beside the repository, outside version control,
+  for every plan after them to draw on.
+
+  Every finding the audit leaves open is planned as a change of its own, and
+  none is dropped at planning: one the rules above weigh as poor payback is
+  planned all the same, saying so in its Why for the owner to strike. The
+  changes land in this order: first what ships or misleads - the release
+  build's content, a test that passes without proving anything, a statement
+  that is false - then names, then structure and build, then reuse, then the
+  coverage still missing, and last whatever moves a pixel. Each builds on
+  the tree its predecessors leave, so each is planned only once the one
+  before it has been applied, and counts its tables on that tree.
+
+  A rename is proved to be one: every suite's count and the test total
+  stand as before, version control shows each moved file as a rename, and a
+  search for every old name finds only what the plan keeps.
+
+# Per-artifact rules, additive to the schema's own guidance.
+rules:
+  proposal:
+    - "Use a kebab-case change id that is also a valid git branch name; implemented on a branch, the change takes it as `feature/<id>`."
+    - "Say in one line how hard the change is - relatively simple, complex, or needing very deep study - and why: a simple change is implemented on `develop`, any other on `feature/<id>`."
+    - "Name the queued plans the change builds on, in apply order, or say it builds on `develop` alone."
+    - "Name the subject the change will land on `develop` with, in the Conventional Commits form `CLAUDE.md` gives - `feat(catalog): add a price filter`."
+    - "Name every unmade decision the change rests on and propose it in Why; a proposal that quietly assumes one is not ready."
+    - "If the Capabilities section cannot be delivered inside the spec budget, propose several changes instead of one and say in Why which one comes first."
+    - "Why opens with one paragraph: the problem, its evidence in numbers or names, and why now. Decisions follow as bullets."
+    - "A dependency's audit is a table - version, license, source, known vulnerabilities, transitive artifacts - with prose only for a finding."
+  specs:
+    - "A spec whose requirements will not fit the budget is split along capability boundaries - the overflow becomes its own spec, or its own change when it carries tasks of its own."
+    - "Every requirement must be verifiable as written; if the check cannot be named, the requirement is not specific enough yet."
+    - "State the behavior, not the API that renders it: a requirement naming a UI framework type or a platform SDK belongs in design instead."
+    - "A requirement a queued plan also changes is MODIFIED from that plan's text, carried whole."
+    - "A spec that creates a capability opens with its `## Purpose`, 50 characters at least: the archive writes it into the new main spec, and `--strict` refuses the placeholder written otherwise."
+  design:
+    - "Say which layer the behavior lands in - the core, the UI above it, or platform-specific code."
+    - "Anything placed in platform-specific code carries the reason it cannot be shared; being easier to write there is not one."
+    - "Keep the rules out of the UI: a behavior that can only be described by pointing at a UI component belongs in the core instead."
+    - "A screen is assembled from UI components that each do one thing and are named for it; a screen written as a single component keeps its seams inside it."
+    - "State how each component is tested and name the seam that makes it possible; a design with no test seam is not done."
+    - "Name each file's one task in a sentence with no \"and\"; needing one means the design holds two files."
+    - "Record a decision only where there was a real alternative; a design with none says so in one line instead of filling its sections."
+    - "A risk is one line: the risk, an arrow, the mitigation."
+  tasks:
+    - "Order tasks test-first: a task that changes business logic opens with the failing test that pins it."
+    - "Keep each task independently verifiable - it ends with a green suite, not with work left dangling for the next task."
+    - "Name how each task is checked - the command to run or the observation that proves it done; a task with no check is not a task."
+    - "A task is a step and its check in at most 60 words; its reason lives in the design, and the task points there."
+    - "A count the queued plans change, such as a test total, is the base plus their deltas, marked expected."
+
+# Per-operation advisory guidance. Only `apply` and `archive` are supported.
+operations:
+  apply:
+    guidance:
+      - "Run red-green-refactor per task: write the test, run it and see it fail for the right reason, then write the code that makes it pass."
+      - "Red-green-refactor is the rule for the business logic; a UI component that only renders the state it is handed is not held to it, and a UI component that needs a test of its own is one holding logic that belongs in the core."
+      - "Tests for the core run on the host; needing a simulator or a device to check core behavior is a signal the logic sits in the wrong layer."
+      - "Never mark a task complete while a test is failing or skipped; report the failure instead."
+      - "If implementation reveals the change is wider than its specs described, stop and raise it for a split rather than growing the specs to match."
+      - "If implementation forces a decision the proposal did not make, stop and raise it; do not settle it silently in code."
+      - "Under a finished task, write only what the diff cannot show: numbers measured, deviations from the plan, decisions surfaced and who made them."
+  archive:
+    guidance:
+      - "Say what the change left undecided - decisions surfaced while implementing and deliberately deferred - one line each, so the next proposal can pick them up."
