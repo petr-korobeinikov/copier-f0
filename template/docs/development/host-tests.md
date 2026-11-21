@@ -12,6 +12,7 @@ From `.mise/tasks/`:
 
 - `test` builds the suites under `test/` with the system `cc` and runs them on the Mac,
   one `ok` line per test.
+  The template ships no suite: the first comes with the first code in `src/core/`.
 
 `mise run test` alone also needs the system `cc`, unpinned.
 It compiles with the SDK's warning flags as errors,
