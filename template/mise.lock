@@ -3,51 +3,51 @@
 lockfile_version = 4
 
 [[tools.act]]
-version = "0.2.95"
+version = "0.2.98"
 backend = "aqua:nektos/act"
-specifiers = ["0.2.95"]
+specifiers = ["0.2.98"]
 
 [tools.act."platforms.linux-arm64"]
-checksum = "sha256:79144acf5dbfaca3385c82244e76f4475d98abe0a4dcc7fcac246dc900e7dd07"
+checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184435"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
 
 [tools.act."platforms.linux-arm64-musl"]
-checksum = "sha256:79144acf5dbfaca3385c82244e76f4475d98abe0a4dcc7fcac246dc900e7dd07"
+checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184435"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
 
 [tools.act."platforms.linux-x64"]
-checksum = "sha256:f1167e99e4bed0162c7d2a3cfdc45030a905db3592a6c8ef236a416c551c077b"
+checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Linux_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184376"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
 
 [tools.act."platforms.linux-x64-musl"]
-checksum = "sha256:f1167e99e4bed0162c7d2a3cfdc45030a905db3592a6c8ef236a416c551c077b"
+checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Linux_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184376"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
 
 [tools.act."platforms.macos-arm64"]
-checksum = "sha256:838c269e4b9dc1fee90b20479fe130c673069418971316a3db6d70202a2f86bb"
+checksum = "sha256:14477d7e076b12a885c54301beff2b524a905e4238a2b3ec9b3d1fd0efdc100f"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184377"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293523"
 
 [tools.act."platforms.macos-x64"]
-checksum = "sha256:f352abab95b708288206769c6bd7ffcf87355974a0c1c0b4268d2ebff171eb7d"
+checksum = "sha256:a0885179705d0f3f5d27201cefa0309ac78e3fccda447ecdfb96877b66b565b0"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Darwin_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184500"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293525"
 
 [tools.act."platforms.windows-x64"]
-checksum = "sha256:a6ff8370ebc16331c3eb381571d753ef33532bc7785ccb6ea480ae55fb028742"
+checksum = "sha256:d0d868ee2b33bb710f4df82d69345ce3a10d2f9fc7bbee9522bf36a15779ada0"
 checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.95/act_Windows_x86_64.zip"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/704184496"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Windows_x86_64.zip"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293583"
 
 [[tools.actionlint]]
 version = "1.7.12"
