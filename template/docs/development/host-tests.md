@@ -23,12 +23,13 @@ after the `ok` lines of the tests before it.
 ## Writing a test
 
 The core, `src/core/`, includes no Flipper header, so it builds on the Mac.
-A suite `test/<name>_test.c` is built with `src/core/<name>.c` and every `test/*_fake.c`:
+A suite `test/<path>_test.c` is built with `src/core/<path>.c`, at any depth,
+and with every `*_fake.c` under `test/`:
 
 - each test is a `static void test_…(void)` function on `assert`;
 - `main` runs each through `test_run` from `test/test.h`, which prints `ok <name>`;
 - code that reaches the platform through an interface gets a fake of it,
-  `test/<interface>_fake.c` with its header beside it, which every suite links.
+  `<interface>_fake.c` under `test/` with its header beside it, which every suite links.
 
 A `.c` file under `test/` builds into no package, and lint checks it.
 

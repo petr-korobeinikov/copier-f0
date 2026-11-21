@@ -5,17 +5,30 @@ set -eu
 dir=$(mktemp -d)
 trap 'rm -rf "$dir"' EXIT
 
-# A test links every fake there is; with none yet, the glob stays unexpanded.
-set -- test/*_fake.c
-if [ ! -e "$1" ]; then
-    set --
-fi
+# Files under test/ at any depth; here-documents, unlike pipes, keep the loops in this shell.
+fakes=$(find test -type f -name '*_fake.c' | sort)
+tests=$(find test -type f -name '*_test.c' | sort)
 
-# The SDK's warning flags, plus the sanitizers the device cannot run.
-for test in test/*_test.c; do
-    name=$(basename "$test" _test.c)
+# A test links every fake there is.
+set --
+while IFS= read -r fake; do
+    [ -n "$fake" ] || continue
+    set -- "$@" "$fake"
+done <<EOF
+$fakes
+EOF
+
+# test/<path>_test.c tests src/core/<path>.c. The SDK's warning flags, plus the sanitizers
+# the device cannot run.
+while IFS= read -r test; do
+    [ -n "$test" ] || continue
+    unit=${test#test/}
+    unit=${unit%_test.c}
+    mkdir -p "$(dirname "$dir/$unit")"
     cc -Wall -Wextra -Werror -Wredundant-decls -Wdouble-promotion -Wundef \
         -fsanitize=address,undefined -fno-sanitize-recover=all -g \
-        -Isrc/core -Itest -o "$dir/$name" "src/core/$name.c" "$test" "$@"
-    "$dir/$name"
-done
+        -Isrc/core -Itest -o "$dir/$unit" "src/core/$unit.c" "$test" "$@"
+    "$dir/$unit"
+done <<EOF
+$tests
+EOF

@@ -14,13 +14,19 @@ trap 'rm -rf "$home"' EXIT
 
 # A header's finding shows only when the header is read itself, and clangd's editor features,
 # left on, would count failures of their own.
+# Every .c and .h under src/, at any depth; the here-document, unlike a pipe, keeps the loop
+# in this shell, so status outlives it.
+files=$(find src -type f \( -name '*.c' -o -name '*.h' \) | sort)
 status=0
-for file in src/*/*.c src/*/*.h; do
+while IFS= read -r file; do
+    [ -n "$file" ] || continue
     if ! output=$(HOME="$home" XDG_CONFIG_HOME="$home" "$bin/clangd" --check="$file" \
         --check-locations=false --query-driver="$toolchain/*/bin/arm-none-eabi-gcc" \
         --log=error 2>&1); then
         printf '%s\n%s\n' "$file" "$output"
         status=1
     fi
-done
+done <<EOF
+$files
+EOF
 exit "$status"
