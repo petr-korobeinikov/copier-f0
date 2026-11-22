@@ -4,7 +4,7 @@
 static void main_draw_callback(Canvas* canvas, void* context) {
     UNUSED(context);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignCenter, "Hello copier-f0");
+    canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignCenter, "Hello, Flipper!");
 }
 
 /* Runs on the GUI thread, which must not wait on the queue. */
