@@ -7,6 +7,15 @@ if [ "$(uname -s)" != Darwin ]; then
     exit 1
 fi
 
+# A fresh clone holds only the branch it checked out, and `init` would lay the other base
+# branch down at HEAD and check it out: one that origin holds is taken from there first.
+for branch in main develop; do
+    if ! git show-ref --verify --quiet "refs/heads/$branch" &&
+        git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+        git branch --quiet --track "$branch" "origin/$branch"
+    fi
+done
+
 # `init --force` lays down main and develop and leaves .gitflow untouched;
 # `config sync` copies the committed model into .git/config, which a clone does not carry.
 git flow init --force --preset=classic --defaults
