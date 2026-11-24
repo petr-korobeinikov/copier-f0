@@ -1,0 +1,41 @@
+#!/bin/sh
+#MISE description="Tag main as the next release and push the tag to origin"
+set -eu
+
+refuse() {
+    echo "release: $1" >&2
+    exit 1
+}
+
+[ $# -eq 0 ] || refuse "usage: mise run release"
+
+cd "$(git rev-parse --show-toplevel)"
+
+branch=$(git symbolic-ref --short -q HEAD || true)
+[ "$branch" = main ] || refuse "run it on main, not ${branch:-a detached HEAD}"
+[ -z "$(git status --porcelain)" ] || refuse "the worktree is not clean"
+
+git fetch -q --tags origin
+# Only a pushed commit has been through CI.
+[ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ] || refuse "main differs from origin/main"
+
+released=$(git tag --points-at HEAD --list 'v*' | head -n 1)
+[ -z "$released" ] || refuse "main is already $released"
+
+# One call to date, so the year and the month cannot straddle New Year's midnight; no leading
+# zero in the month keeps the name valid SemVer.
+month=$(date -u +%Y.%-m)
+highest=$(git tag --list "v$month.*" | sed "s/^v$month\.//" | grep -Ex '0|[1-9][0-9]*' | sort -n | tail -n 1)
+if [ -z "$highest" ]; then
+    name=$month.0
+else
+    name=$month.$((highest + 1))
+fi
+
+git tag -s -m "v$name" "v$name"
+# A tag left behind would make the next run refuse main as already released.
+git push -q origin "refs/tags/v$name" || {
+    git tag -d "v$name" > /dev/null
+    refuse "the push failed, so v$name is deleted"
+}
+echo "release: v$name is pushed"

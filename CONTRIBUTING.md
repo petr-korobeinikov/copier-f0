@@ -36,6 +36,18 @@ so a change to the project's `ci.yml` is carried into this one.
 `mise run check-workflow`, run in this repository, puts the jobs through act on the Mac;
 Copier takes uncommitted changes there too.
 
+## Release
+
+A release is a signed tag on `main`, named `vYYYY.M.MICRO`:
+the year, the month without a leading zero,
+and the count of releases cut earlier that month, from 0 —
+`v2026.11.0`.
+Copier reads the tag as the template's version,
+and `copier copy` and `copier update` take the highest one.
+
+`mise run release`, run on a clean `main` that matches `origin/main` after CI has passed on it,
+tags the commit with the next name and pushes the tag.
+
 ## Commits
 
 A commit message is a [Conventional Commit](https://www.conventionalcommits.org/), in English:
