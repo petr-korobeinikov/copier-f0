@@ -1,5 +1,10 @@
 _subdirectory: template
 _preserve_symlinks: true
+# An update re-applies the project's own changes as a text diff, which loses a binary's,
+# so the project's icon would turn back into the placeholder (copier/_main.py:1538-1599).
+# A skip-if-exists path is left out of both the render and that diff (_main.py:505).
+_skip_if_exists:
+    - "asset/icon/{{ app_id }}.png"
 
 # fbt packs the name into 32 ASCII bytes, the last kept for the NUL
 # (scripts/fbt/elfmanifest.py:42), and it sits in a Python and a C string literal.
