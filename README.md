@@ -9,14 +9,13 @@ It needs macOS, where `mise run setup` deploys the SDK under `sandbox-exec`,
 and [mise](https://mise.jdx.dev/),
 which installs everything else, Copier included.
 
-## Who it is for
-
-For most vibe-coded apps of a single file, this template is overkill.
-Its rules are strict:
-every change is planned as an OpenSpec change before its code is written,
-a session either plans or implements,
-and nothing is committed before its diff is reviewed.
-It does not suit vibe coding with one-shot prompts.
+> [!IMPORTANT]
+> For most vibe-coded apps of a single file, this template is overkill.
+> Its rules are strict:
+> every change is planned as an OpenSpec change before its code is written,
+> a session either plans or implements,
+> and nothing is committed before its diff is reviewed.
+> It does not suit vibe coding with one-shot prompts.
 
 ## Create a project
 
@@ -36,7 +35,7 @@ Copier asks for the app's name, id, category, description, author and web page,
 then for the docs site's address, the copyright year and the license:
 MIT, GPL-3.0-only, Apache-2.0 or another by its SPDX id,
 whose `LICENSE` the project adds itself.
-The template has no tags yet, so Copier takes its `HEAD`.
+Copier takes the template's latest release.
 
 Then bring the project to life:
 
