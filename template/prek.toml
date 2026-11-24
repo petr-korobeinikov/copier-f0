@@ -20,7 +20,9 @@ hooks = [
   # Markdown pays for a trailing double space: there it is a hard line break, not dirt.
   { id = "trailing-whitespace", args = ["--markdown-linebreak-ext", "md"] },
   { id = "end-of-file-fixer" },
-  { id = "check-merge-conflict" },
+  # `copier update` leaves a conflict's markers outside a git merge, where the hook looks
+  # only with this flag.
+  { id = "check-merge-conflict", args = ["--assume-in-merge"] },
   { id = "check-added-large-files" },
   { id = "check-case-conflict" },
   { id = "detect-private-key" },
