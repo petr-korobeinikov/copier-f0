@@ -1,0 +1,28 @@
+name: generate
+description: Generate a project from the checked-out template into ../project, as a git repository
+
+runs:
+  using: composite
+  steps:
+    - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+      with:
+        version: 2026.11.2
+        # mise does not check a restored tool cache against mise.lock.
+        cache: false
+        install_args: uv pypi:copier
+    # HEAD, not the latest tag Copier takes by default, so the commit under test is the one
+    # generated. Outside the checkout, so mise does not merge this repository's mise.toml into
+    # the project's; prek and actionlint need the files in git's index.
+    - shell: sh
+      run: |
+        mise exec -- copier copy --vcs-ref=HEAD --defaults --quiet \
+            --data 'app_name=Template CI' \
+            --data app_category=Tools \
+            --data 'app_description=Proves the copier-f0 template in CI' \
+            --data app_author=copier-f0 \
+            --data app_weburl=https://github.com/petr-korobeinikov/copier-f0 \
+            . ../project
+        cd ../project
+        git init --quiet
+        git add -A
+        mise trust

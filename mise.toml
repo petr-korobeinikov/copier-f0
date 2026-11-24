@@ -3,7 +3,11 @@ disable_backends = ["ubi", "asdf"]
 lockfile = true
 
 [tools]
+# Runs .github/workflows/ci.yml on the Mac, and actionlint checks it before a commit.
+act = "0.2.98"
+actionlint = "1.7.12"
 uv = "0.13.7"
+"aqua:koalaman/shellcheck" = "0.11.0"
 # Audited 2026-11-19: 21 packages, wheels only, no known vulnerabilities.
 "pypi:copier" = { version = "9.19.1", python = "3.14.10" }
 

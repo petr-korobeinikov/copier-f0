@@ -27,6 +27,15 @@ by `copier update` on a project generated before it.
 A tool's version in `template/mise.toml` changes together with `template/mise.lock`,
 written by `mise lock` in a generated project and carried back.
 
+## CI
+
+`.github/workflows/ci.yml` runs on every push to `main` and on every pull request.
+Its jobs are the generated project's `ci.yml`, job by job and step by step,
+each run in a project that `.github/actions/generate` generates from the commit under test,
+so a change to the project's `ci.yml` is carried into this one.
+`mise run check-workflow`, run in this repository, puts the jobs through act on the Mac;
+Copier takes uncommitted changes there too.
+
 ## Commits
 
 A commit message is a [Conventional Commit](https://www.conventionalcommits.org/), in English:

@@ -1,0 +1,87 @@
+name: ci
+
+# The generated project's own ci.yml, job by job and step by step, run in a project generated
+# from the commit under test. Only the checkout, the generation and working_directory differ.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  # mise exec and mise run would install every tool a job leaves out, without the token.
+  MISE_AUTO_INSTALL: "false"
+
+defaults:
+  run:
+    working-directory: ../project
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/generate
+      - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+        with:
+          version: 2026.11.2
+          cache: false
+          install: false
+          working_directory: ../project
+      - run: mise run test
+
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/generate
+      - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+        with:
+          version: 2026.11.2
+          cache: false
+          install_args: uv pypi:ufbt
+          working_directory: ../project
+      - run: |
+          # shellcheck disable=SC2016
+          mise exec -- sh -c 'ufbt update --branch "$FLIPPER_SDK_VERSION"'
+      - run: mise run build
+      - run: mise exec -- ufbt lint
+      - run: mise run clang-tidy
+
+  hygiene:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/generate
+      - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+        with:
+          version: 2026.11.2
+          cache: false
+          install_args: actionlint aqua:j178/prek aqua:koalaman/shellcheck
+          working_directory: ../project
+      - run: mise exec -- prek run --all-files
+      - run: mise exec -- actionlint -pyflakes=
+
+  docs:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/generate
+      - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+        with:
+          version: 2026.11.2
+          cache: false
+          install_args: uv pypi:zensical
+          working_directory: ../project
+      - run: mise run docs-build
