@@ -79,3 +79,24 @@ copyright_year:
         {% if not (copyright_year | regex_search('^[0-9]{4}$')) %}
         Use a four-digit year.
         {% endif %}
+
+# SPDX ids. Copier refuses an answer outside the choices, so a license of one's own
+# goes through Other and the next question; its LICENSE is the project's to add.
+license:
+    type: str
+    help: The project's license
+    choices:
+        MIT: MIT
+        GPL-3.0-only: GPL-3.0-only
+        Apache-2.0: Apache-2.0
+        Other: other
+    default: MIT
+
+license_other:
+    type: str
+    help: Your license's SPDX id, as BSD-3-Clause
+    when: "{{ license == 'other' }}"
+    validator: >-
+        {% if not (license_other | regex_search('^[A-Za-z0-9.-]+$')) %}
+        Use an SPDX id: letters, digits, dots and dashes.
+        {% endif %}

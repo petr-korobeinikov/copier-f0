@@ -6,7 +6,7 @@ site_url = "{{ docs_url }}"
 site_dir = ".site"
 repo_url = "{{ app_weburl }}"
 copyright = """
-<a href="{{ app_weburl }}/blob/develop/LICENSE">GPL-3.0</a>.
+{% if license == 'other' %}{{ license_other }}{% else %}<a href="{{ app_weburl }}/blob/develop/LICENSE">{{ license }}</a>{% endif %}.
 Copyright (C) {{ copyright_year }} {{ app_author | e }}.
 """
 

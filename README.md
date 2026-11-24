@@ -22,7 +22,9 @@ mise exec -- copier copy . ../f0-my-app
 ```
 
 Copier asks for the app's name, id, category, description, author and web page,
-then for the docs site's address and the copyright year.
+then for the docs site's address, the copyright year and the license:
+MIT, GPL-3.0-only, Apache-2.0 or another by its SPDX id,
+whose `LICENSE` the project adds itself.
 The template has no tags yet, so Copier takes its `HEAD`.
 
 Then bring the project to life:
