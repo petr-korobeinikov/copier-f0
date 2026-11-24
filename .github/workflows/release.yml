@@ -1,0 +1,43 @@
+name: release
+
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
+
+permissions:
+  contents: read
+
+env:
+  # mise exec and mise run would install every tool a job leaves out, without the token.
+  MISE_AUTO_INSTALL: "false"
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  # Published once CI passes on the tag: no job follows that could still fail.
+  publish:
+    needs: ci
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # git-cliff reads the tags and the history before them.
+          fetch-depth: 0
+      - uses: jdx/mise-action@f5be966e4a917d54244728e6a5fdcd1d93a35e6c # v5.2.6
+        with:
+          version: 2026.11.2
+          # mise does not check a restored tool cache against mise.lock.
+          cache: false
+          install_args: git-cliff
+      - run: mise exec -- git-cliff --current --strip all --output notes.md
+      - run: |
+          # Without --verify-tag, gh cuts a missing tag from the default branch.
+          gh release create "$GITHUB_REF_NAME" --verify-tag --title "$GITHUB_REF_NAME" --notes-file notes.md
+        env:
+          GH_TOKEN: ${{ github.token }}

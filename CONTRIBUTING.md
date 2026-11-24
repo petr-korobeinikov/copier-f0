@@ -46,7 +46,12 @@ Copier reads the tag as the template's version,
 and `copier copy` and `copier update` take the highest one.
 
 `mise run release`, run on a clean `main` that matches `origin/main` after CI has passed on it,
-tags the commit with the next name and pushes the tag.
+regenerates `CHANGELOG.md` with git-cliff,
+commits it as `chore: release YYYY.M.MICRO`, tags that commit with the next name
+and pushes the commit and the tag together.
+The tag starts `.github/workflows/release.yml`:
+CI runs on the tag, and once it passes,
+the GitHub Release is published with the release's section of the changelog as its notes.
 
 ## Commits
 

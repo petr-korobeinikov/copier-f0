@@ -1,5 +1,5 @@
 #!/bin/sh
-#MISE description="Tag main as the next release and push the tag to origin"
+#MISE description="Commit the changelog of the next release on main, tag it and push both to origin"
 set -eu
 
 refuse() {
@@ -32,10 +32,26 @@ else
     name=$month.$((highest + 1))
 fi
 
-git tag -s -m "v$name" "v$name"
-# A tag left behind would make the next run refuse main as already released.
-git push -q origin "refs/tags/v$name" || {
-    git tag -d "v$name" > /dev/null
-    refuse "the push failed, so v$name is deleted"
+base=$(git rev-parse HEAD)
+# The tree was clean, so this drops only the run's own writes; a commit or a tag left behind
+# would make the next run refuse main.
+undo() {
+    status=$?
+    git tag -d "v$name" > /dev/null 2>&1 || true
+    git reset -q --hard "$base"
+    git clean -fq -- CHANGELOG.md
+    echo "release: v$name is undone" >&2
+    exit "$status"
 }
+trap undo EXIT
+trap 'exit 1' HUP INT TERM
+
+git-cliff --tag "v$name" --output CHANGELOG.md
+git add CHANGELOG.md
+git commit -q -S -m "chore: release $name"
+git tag -s -m "v$name" "v$name"
+# Atomic, so origin gets the commit and the tag together or neither.
+git push -q --atomic origin main "refs/tags/v$name"
+
+trap - EXIT
 echo "release: v$name is pushed"
