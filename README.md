@@ -4,14 +4,12 @@
 [![release](https://img.shields.io/github/v/release/petr-korobeinikov/copier-f0)](https://github.com/petr-korobeinikov/copier-f0/releases/latest)
 [![license](https://img.shields.io/github/license/petr-korobeinikov/copier-f0)](LICENSE)
 
-A [Copier](https://copier.readthedocs.io/) template for a Flipper Zero app:
-ufbt with the pinned SDK, host tests, CLion, OpenSpec, git-flow,
-the prek hooks, CI, the docs site and the release.
-The generated project's docs cover each of them.
+A [Copier](https://copier.readthedocs.io/) template for a Flipper Zero app.
+The project you get has ufbt with a pinned SDK, host tests, CLion,
+OpenSpec, git-flow, prek hooks, CI, a docs site and a release task.
 
-It needs macOS, where `mise run setup` deploys the SDK under `sandbox-exec`,
-and [mise](https://mise.jdx.dev/),
-which installs everything else, Copier included.
+You need macOS and [mise](https://mise.jdx.dev/).
+mise installs the rest, Copier included.
 
 > [!IMPORTANT]
 > For most vibe-coded apps of a single file, this template is overkill.
@@ -23,25 +21,25 @@ which installs everything else, Copier included.
 
 ## Create a project
 
-Copier is pinned in this repository's `mise.toml`,
-so it runs from a clone of it,
-and takes the template from GitHub:
+Clone this repository: Copier is pinned in it.
 
 ```shell
 git clone https://github.com/petr-korobeinikov/copier-f0.git
 cd copier-f0
 mise trust
 mise install
+```
+
+Generate the project:
+
+```shell
 mise exec -- copier copy gh:petr-korobeinikov/copier-f0 ../f0-my-app
 ```
 
-Copier asks for the app's name, id, category, description, author and web page,
-then for the docs site's address, the copyright year and the license:
-MIT, GPL-3.0-only, Apache-2.0 or another by its SPDX id,
-whose `LICENSE` the project adds itself.
-Copier takes the template's latest release.
+Copier asks about the app and its license.
+If you pick Other as the license, add your own `LICENSE` file.
 
-Then bring the project to life:
+Set the project up and make the first commit:
 
 ```shell
 cd ../f0-my-app
@@ -53,14 +51,12 @@ git add -A
 git commit -m "chore: generate from copier-f0"
 ```
 
-`mise run setup` makes `main` and `develop` with git-flow,
-installs the hooks and deploys the SDK;
-the commit lands on `develop` through the hooks.
+The commit lands on `develop`.
 
 ## Update a project
 
-Commit everything in the project first,
-then run the update from the root of the clone of this repository:
+Commit everything in the project.
+Then, in the `copier-f0` clone:
 
 ```shell
 git pull
@@ -71,9 +67,11 @@ GIT_CONFIG_COUNT=1 \
     mise exec -- copier update --skip-answered "$(cd ../f0-my-app && pwd -P)"
 ```
 
-Copier keeps the earlier answers and asks only the new questions.
-A conflict stays in the file as git's markers.
-Then check the project and commit:
+Copier asks only the new questions.
+If it reports a conflict, find the `<<<<<<<` markers in the files and fix them by hand:
+the hooks won't commit them.
+
+Check the project and commit:
 
 ```shell
 cd ../f0-my-app
@@ -83,10 +81,16 @@ git add -A
 git commit -m "chore: update from copier-f0"
 ```
 
-Why the command looks like this:
-the project records the template as `gh:petr-korobeinikov/copier-f0`,
-so Copier takes its new version from GitHub,
-and the clone, pulled, only brings Copier's pin;
-a path with `..` breaks Copier, so it is made absolute;
-and the `GIT_CONFIG_*` variables stop the SDK's files from overflowing Copier's call to git
-where `status.showUntrackedFiles` is `all`.
+`mise run check-workflow` runs the project's CI locally.
+
+<details>
+<summary>Why the update command is so long</summary>
+
+- Copier takes the new template from GitHub;
+  the clone only gives it Copier's pinned version.
+- Copier fails on a path with `..`, so the path is made absolute.
+- Where git's `status.showUntrackedFiles` is `all`,
+  the SDK's files overflow Copier's call to git;
+  the `GIT_CONFIG_*` variables turn it back to `normal`.
+
+</details>
