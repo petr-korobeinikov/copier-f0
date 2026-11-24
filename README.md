@@ -1,5 +1,9 @@
 # copier-f0
 
+[![ci](https://github.com/petr-korobeinikov/copier-f0/actions/workflows/ci.yml/badge.svg)](https://github.com/petr-korobeinikov/copier-f0/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/petr-korobeinikov/copier-f0)](https://github.com/petr-korobeinikov/copier-f0/releases/latest)
+[![license](https://img.shields.io/github/license/petr-korobeinikov/copier-f0)](LICENSE)
+
 A [Copier](https://copier.readthedocs.io/) template for a Flipper Zero app:
 ufbt with the pinned SDK, host tests, CLion, OpenSpec, git-flow,
 the prek hooks, CI, the docs site and the release.
