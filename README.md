@@ -12,13 +12,15 @@ which installs everything else, Copier included.
 ## Create a project
 
 Copier is pinned in this repository's `mise.toml`,
-so it runs from a clone of it:
+so it runs from a clone of it,
+and takes the template from GitHub:
 
 ```shell
+git clone https://github.com/petr-korobeinikov/copier-f0.git
 cd copier-f0
 mise trust
 mise install
-mise exec -- copier copy . ../f0-my-app
+mise exec -- copier copy gh:petr-korobeinikov/copier-f0 ../f0-my-app
 ```
 
 Copier asks for the app's name, id, category, description, author and web page,
@@ -49,6 +51,8 @@ Commit everything in the project first,
 then run the update from the root of the clone of this repository:
 
 ```shell
+git pull
+mise install
 GIT_CONFIG_COUNT=1 \
     GIT_CONFIG_KEY_0=status.showUntrackedFiles \
     GIT_CONFIG_VALUE_0=normal \
@@ -68,7 +72,9 @@ git commit -m "chore: update from copier-f0"
 ```
 
 Why the command looks like this:
-the project records the template as `.`, so Copier runs from the template's clone;
+the project records the template as `gh:petr-korobeinikov/copier-f0`,
+so Copier takes its new version from GitHub,
+and the clone, pulled, only brings Copier's pin;
 a path with `..` breaks Copier, so it is made absolute;
 and the `GIT_CONFIG_*` variables stop the SDK's files from overflowing Copier's call to git
 where `status.showUntrackedFiles` is `all`.
