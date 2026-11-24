@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.11.1 — 2026-11-24
+
+### 🐛 Bug Fixes
+
+- Keep main where origin has it in a fresh clone (`7223999`)
+- Keep the app's icon on update (`c1094b0`)
+- Refuse an update's conflict markers at commit (`475d407`)
+
+### 📚 Documentation
+
+- Show ci, release and license badges (`1477d4f`)
+
 ## 2026.11.0 — 2026-11-24
 
 ### 🚀 Features
