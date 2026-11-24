@@ -9,6 +9,15 @@ It needs macOS, where `mise run setup` deploys the SDK under `sandbox-exec`,
 and [mise](https://mise.jdx.dev/),
 which installs everything else, Copier included.
 
+## Who it is for
+
+For most vibe-coded apps of a single file, this template is overkill.
+Its rules are strict:
+every change is planned as an OpenSpec change before its code is written,
+a session either plans or implements,
+and nothing is committed before its diff is reviewed.
+It does not suit vibe coding with one-shot prompts.
+
 ## Create a project
 
 Copier is pinned in this repository's `mise.toml`,
