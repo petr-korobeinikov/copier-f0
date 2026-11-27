@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026.11.2 — 2026-11-27
+
+### 📚 Documentation
+
+- Simplify the readme (`633c301`)
+
+### 🏗️ Build & CI
+
+- Check that the openspec skills match openspec (`3ae953d`)
+
+### ⚙️ Miscellaneous Tasks
+
+- *(mise)* Bump uv, prek, openspec, zensical and python 3.15 (`89a4550`)
+- *(openspec)* Regenerate the skills with openspec 2.2.0 (`3c34dc8`)
+
 ## 2026.11.1 — 2026-11-24
 
 ### 🐛 Bug Fixes
