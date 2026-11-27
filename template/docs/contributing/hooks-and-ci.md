@@ -45,7 +45,7 @@ Each step is a command to run before pushing:
 |---|---|
 | `test` | `mise run test` |
 | `build` | `mise exec -- sh -c 'ufbt update --branch "$FLIPPER_SDK_VERSION"'`, `mise run build`, `mise exec -- ufbt lint`, `mise run clang-tidy` |
-| `hygiene` | `mise exec -- prek run --all-files`, `mise exec -- actionlint -pyflakes=` |
+| `hygiene` | `mise exec -- prek run --all-files`, `mise exec -- actionlint -pyflakes=`, `mise exec -- openspec update && git add --intent-to-add . && git diff --exit-code` |
 | `docs` | `mise run docs-build` |
 
 On the Mac, `mise run setup` stands in for `build`'s first step.

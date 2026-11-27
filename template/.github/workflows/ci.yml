@@ -59,10 +59,12 @@ jobs:
         with:
           version: 2026.11.2
           cache: false
-          install_args: actionlint aqua:j178/prek aqua:koalaman/shellcheck
+          install_args: actionlint node aqua:j178/prek aqua:koalaman/shellcheck npm:@fission-ai/openspec
       - run: mise exec -- prek run --all-files
       # mise puts its pinned shellcheck first on PATH; pyflakes stays off, as no step runs Python.
       - run: mise exec -- actionlint -pyflakes=
+      # openspec update rewrites the skills it generates: a bump of openspec must carry them along.
+      - run: mise exec -- openspec update && git add --intent-to-add . && git diff --exit-code
 
   docs:
     runs-on: ubuntu-24.04
