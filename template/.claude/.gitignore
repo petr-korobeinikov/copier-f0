@@ -2,8 +2,9 @@
 #   • `npx skills add`  — tracked in skills-lock.json, restored by the CLI → NOT committed
 #   • OpenSpec (`openspec init/update`) — no lockfile → committed:
 #     links to the skills themselves, which live in .agents/skills/
-# So: ignore all skills, then re-include the OpenSpec-generated links (openspec-* prefix).
+# So: ignore all skills, then re-include the OpenSpec-generated links (openspec and openspec-*).
 /skills/*
+!/skills/openspec
 !/skills/openspec-*
 
 # Local-only Claude Code settings (per-machine permissions, etc.) — never share.

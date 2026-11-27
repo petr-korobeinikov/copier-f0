@@ -157,5 +157,5 @@ nothing else writes either file.
 
 ## Generated files
 
-The `openspec-*` skills under `.agents/skills/` and their links under `.claude/skills/` are generated —
+The `openspec` and `openspec-*` skills under `.agents/skills/` and their links under `.claude/skills/` are generated —
 regenerate them via `mise exec -- openspec update`, don't hand-edit.
