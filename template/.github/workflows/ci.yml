@@ -39,7 +39,7 @@ jobs:
         with:
           version: 2026.11.2
           cache: false
-          install_args: uv pypi:ufbt
+          install_args: aqua:astral-sh/uv pypi:ufbt
       # setup's deploy without its macOS-only sandbox, the pin read inside mise: an empty --branch
       # deploys the release channel.
       - run: |
@@ -74,5 +74,5 @@ jobs:
         with:
           version: 2026.11.2
           cache: false
-          install_args: uv pypi:zensical
+          install_args: aqua:astral-sh/uv pypi:zensical
       - run: mise run docs-build

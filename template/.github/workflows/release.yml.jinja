@@ -38,7 +38,7 @@ jobs:
           version: 2026.11.2
           # mise does not check a restored tool cache against mise.lock.
           cache: false
-          install_args: uv pypi:ufbt git-cliff
+          install_args: aqua:astral-sh/uv pypi:ufbt git-cliff
       # ci.yml's deploy: the inner sh reads the pin inside mise.
       - run: |
           # shellcheck disable=SC2016

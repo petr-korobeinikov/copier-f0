@@ -6,18 +6,18 @@ lockfile = true
 locked = true
 
 [tools]
-act = "0.2.98"
 actionlint = "1.7.12"
 git-cliff = "2.14.2"
 node = "26.13.1"
-uv = "0.13.7"
+"aqua:astral-sh/uv" = "0.13.10"
 "aqua:gittower/git-flow-next" = "2.1.0"
-"aqua:j178/prek" = "0.5.10"
+"aqua:j178/prek" = "0.5.12"
 "aqua:koalaman/shellcheck" = "0.11.0"
-"npm:@fission-ai/openspec" = "2.0.0"
-"pypi:ufbt" = { version = "0.2.6", python = "3.14.10" }
-# Builds docs/. Not 3.15: PyYAML 6.0.3 has no cp315 wheel.
-"pypi:zensical" = { version = "0.1.0", python = "3.14.10" }
+"aqua:nektos/act" = "0.2.98"
+"npm:@fission-ai/openspec" = "2.2.0"
+"pypi:ufbt" = { version = "0.2.6", python = "3.15.2" }
+# Builds docs/.
+"pypi:zensical" = { version = "0.1.3", python = "3.15.2" }
 
 [env]
 OPENSPEC_TELEMETRY = "0"

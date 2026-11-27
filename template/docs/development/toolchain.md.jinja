@@ -16,7 +16,7 @@ after `mise run setup`, `clion .` opens the project.
 from the graph `mise.lock` and `.mise/locks/` record, wheels only,
 and refuses a graph that is missing or edited.
 
-ufbt runs from its own venv on Python 3.14.10, with no `pip`,
+ufbt runs from its own venv on Python 3.15.2, with no `pip`,
 and adds nothing to that runtime.
 Neither the runtime, the venv's `python` nor the toolchain's `bin` reaches `PATH`,
 and ufbt fails outside the project.
@@ -66,7 +66,7 @@ since `locked = true` refuses a graph that does not exist yet.
 Change the pin, then restore the section once the new graph is locked:
 
 ```shell
-mise install uv python@<version>
+mise install aqua:astral-sh/uv python@<version>
 mise lock
 mise install
 ```

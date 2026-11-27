@@ -9,7 +9,7 @@ runs:
         version: 2026.11.2
         # mise does not check a restored tool cache against mise.lock.
         cache: false
-        install_args: uv pypi:copier
+        install_args: aqua:astral-sh/uv pypi:copier
     # HEAD, not the latest tag Copier takes by default, so the commit under test is the one
     # generated. Outside the checkout, so mise does not merge this repository's mise.toml into
     # the project's; prek and actionlint need the files in git's index.

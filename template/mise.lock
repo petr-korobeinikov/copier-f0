@@ -2,53 +2,6 @@
 
 lockfile_version = 4
 
-[[tools.act]]
-version = "0.2.98"
-backend = "aqua:nektos/act"
-specifiers = ["0.2.98"]
-
-[tools.act."platforms.linux-arm64"]
-checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
-
-[tools.act."platforms.linux-arm64-musl"]
-checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
-
-[tools.act."platforms.linux-x64"]
-checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
-
-[tools.act."platforms.linux-x64-musl"]
-checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
-
-[tools.act."platforms.macos-arm64"]
-checksum = "sha256:14477d7e076b12a885c54301beff2b524a905e4238a2b3ec9b3d1fd0efdc100f"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293523"
-
-[tools.act."platforms.macos-x64"]
-checksum = "sha256:a0885179705d0f3f5d27201cefa0309ac78e3fccda447ecdfb96877b66b565b0"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_x86_64.tar.gz"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293525"
-
-[tools.act."platforms.windows-x64"]
-checksum = "sha256:d0d868ee2b33bb710f4df82d69345ce3a10d2f9fc7bbee9522bf36a15779ada0"
-checksum_source = "mise-versions"
-url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Windows_x86_64.zip"
-url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293583"
-
 [[tools.actionlint]]
 version = "1.7.12"
 backend = "aqua:rhysd/actionlint"
@@ -94,6 +47,53 @@ provenance = "github-attestations"
 checksum = "sha256:6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9"
 url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_windows_amd64.zip"
 url_api = "https://api.github.com/repos/rhysd/actionlint/releases/assets/384924919"
+provenance = "github-attestations"
+
+[[tools."aqua:astral-sh/uv"]]
+version = "0.13.10"
+backend = "aqua:astral-sh/uv"
+specifiers = ["0.13.10"]
+
+[tools."aqua:astral-sh/uv"."platforms.linux-arm64"]
+checksum = "sha256:14590f644805a6234ffe071154340669e38137f38e60aa9629690119704107d2"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788884668"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.linux-arm64-musl"]
+checksum = "sha256:68174084fe40b6300361c5b2038066120dc62c92920c22a0f31f6fc74b066b57"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788884695"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.linux-x64"]
+checksum = "sha256:bf65ac1a0af10f92c522d91ac096c7c0a39657647b155577e7836c2cbbb4526c"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788885027"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.linux-x64-musl"]
+checksum = "sha256:5597970380083a340b7983af05a84824b4db1c62b7059c796935b7fd6dc95fd2"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788885050"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.macos-arm64"]
+checksum = "sha256:e419bf07533bdbf48795fc793601c834dd79db57a8c49ce8e25cfe3a8639958d"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788884643"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.macos-x64"]
+checksum = "sha256:153e03197588204c04fc4c81cc4bafbfa4280222a385e4ee36a87aeec0ae63b4"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788884988"
+provenance = "github-attestations"
+
+[tools."aqua:astral-sh/uv"."platforms.windows-x64"]
+checksum = "sha256:297b3881fe1adfb922becc2c1613202abb41dc83ea5ff43d472aa087ca1f8683"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788885003"
 provenance = "github-attestations"
 
 [[tools."aqua:gittower/git-flow-next"]]
@@ -144,50 +144,50 @@ url = "https://github.com/gittower/git-flow-next/releases/download/v2.1.0/git-fl
 url_api = "https://api.github.com/repos/gittower/git-flow-next/releases/assets/549957111"
 
 [[tools."aqua:j178/prek"]]
-version = "0.5.10"
+version = "0.5.12"
 backend = "aqua:j178/prek"
-specifiers = ["0.5.10"]
+specifiers = ["0.5.12"]
 
 [tools."aqua:j178/prek"."platforms.linux-arm64"]
-checksum = "sha256:6ee3e5696f0b76bb4c95708579a54714aabd9a20e89c998f69a1a5cc41dbbbee"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839366"
+checksum = "sha256:5080df033c90239233822268086e2e8fad122750f4aa57a38065de865805433f"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080851"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.linux-arm64-musl"]
-checksum = "sha256:352b97c18cc1659786232f3fde9e75b5ec96279893563f6b31b36f2d43dca00f"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839372"
+checksum = "sha256:254fd9421672e778b88f017d33dc419c8d3a1c878d31e16603031ea08b7b8a14"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080857"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.linux-x64"]
-checksum = "sha256:5c832a9ccd0855b7c054320d8921d90165a37459d3ac175923bdf121ff1aa9b1"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839458"
+checksum = "sha256:646c2172a9c8e3b4b33ec803fd027d679ee3319db35a20b53dd2a206f8a15763"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080983"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.linux-x64-musl"]
-checksum = "sha256:c70a639cb98c90feafa213c23fb487644af73c906c5a6cee757403090f253c30"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839467"
+checksum = "sha256:5296788a63b9aea32ffadf2339b555a2ec2df72d49fbb77966e282fe1aedb5f7"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080984"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.macos-arm64"]
-checksum = "sha256:28186099374a3158e7b27e82fedb0bd20723658dc8ee24a841bdffe8a91b1ad9"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839320"
+checksum = "sha256:f155453347245a4e41c0142a689ab0ad8a2997d5747b4a5570254286d1a29807"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080816"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.macos-x64"]
-checksum = "sha256:bbd0cb4b8d2dea949730ba631e5176e99507e5d799464ea8d71386af98bdcb0a"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839419"
+checksum = "sha256:e6fcb68b3f7853cef613d9acb8b497b02c82dcc53147ffc899d97b362a84901f"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080921"
 provenance = "github-attestations"
 
 [tools."aqua:j178/prek"."platforms.windows-x64"]
-checksum = "sha256:4a506e19a95a1bbf40f304b245446c32078c7be4d5b7e4cb412ea93a0cf8b4e5"
-url = "https://github.com/j178/prek/releases/download/v0.5.10/prek-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/j178/prek/releases/assets/707839436"
+checksum = "sha256:c077339127e07fea07d645ee25b007e454527b45aa9af1671d7644ce20481c21"
+url = "https://github.com/j178/prek/releases/download/v0.5.12/prek-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/796080950"
 provenance = "github-attestations"
 
 [[tools."aqua:koalaman/shellcheck"]]
@@ -236,6 +236,53 @@ checksum = "sha256:8a4e35ab0b331c85d73567b12f2a444df187f483e5079ceffa6bda1faa2e7
 checksum_source = "mise-versions"
 url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.zip"
 url_api = "https://api.github.com/repos/koalaman/shellcheck/releases/assets/279056944"
+
+[[tools."aqua:nektos/act"]]
+version = "0.2.98"
+backend = "aqua:nektos/act"
+specifiers = ["0.2.98"]
+
+[tools."aqua:nektos/act"."platforms.linux-arm64"]
+checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.linux-arm64-musl"]
+checksum = "sha256:a30ba1a1582cb93810c77f743415cac33c16f60fc288116a8e0943144b6a6a4f"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293624"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.linux-x64"]
+checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.linux-x64-musl"]
+checksum = "sha256:d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293522"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.macos-arm64"]
+checksum = "sha256:14477d7e076b12a885c54301beff2b524a905e4238a2b3ec9b3d1fd0efdc100f"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293523"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.macos-x64"]
+checksum = "sha256:a0885179705d0f3f5d27201cefa0309ac78e3fccda447ecdfb96877b66b565b0"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Darwin_x86_64.tar.gz"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293525"
+provenance = "github-attestations"
+
+[tools."aqua:nektos/act"."platforms.windows-x64"]
+checksum = "sha256:d0d868ee2b33bb710f4df82d69345ce3a10d2f9fc7bbee9522bf36a15779ada0"
+url = "https://github.com/nektos/act/releases/download/v0.2.98/act_Windows_x86_64.zip"
+url_api = "https://api.github.com/repos/nektos/act/releases/assets/753293583"
+provenance = "github-attestations"
 
 [[tools.git-cliff]]
 version = "2.14.2"
@@ -318,112 +365,65 @@ checksum = "sha256:e2edda75bfb089654705cf65a13b58933bfd5f57148e8ebda916f58a2474f
 url = "https://nodejs.org/dist/v26.13.1/node-v26.13.1-win-x64.zip"
 
 [[tools."npm:@fission-ai/openspec"]]
-version = "2.0.0"
-aube = { path = ".mise/locks/npm-fission-ai-openspec/2.0.0", digest = "sha256:85843af60902f2ec4c182aa9bd7d7df3503ec67d37ebf518df192ece21669cb0" }
+version = "2.2.0"
+aube = { path = ".mise/locks/npm-fission-ai-openspec/2.2.0", digest = "sha256:07ca346080a2758eda6ba0ef67ecd7083b06da27f41250ba2b5d6826b233e144" }
 backend = "npm:@fission-ai/openspec"
-specifiers = ["2.0.0"]
+specifiers = ["2.2.0"]
 
 [[tools."pypi:ufbt"]]
 version = "0.2.6"
 backend = "pypi:ufbt"
 specifiers = ["0.2.6"]
-uv = { path = ".mise/locks/pypi-ufbt/0.2.6~2f4519ff", digest = "sha256:5a0d159b8495c60e3cf8e38f00b5c8f101dc0e5ac9af516991aff42715eedc56" }
+uv = { path = ".mise/locks/pypi-ufbt/0.2.6~a0225876", digest = "sha256:d5a300bde577758d0e2af483f59f09ba976a653f529c637b143f7673489c012b" }
 
 [tools."pypi:ufbt".options]
-python = "3.14.10"
+python = "3.15.2"
 
 [[tools."pypi:zensical"]]
-version = "0.1.0"
+version = "0.1.3"
 backend = "pypi:zensical"
-specifiers = ["0.1.0"]
-uv = { path = ".mise/locks/pypi-zensical/0.1.0~16d441ec", digest = "sha256:f3a1e8013a5c6815cd4959a4b91b4044eff2404966bda78ca030ec9524055df5" }
+specifiers = ["0.1.3"]
+uv = { path = ".mise/locks/pypi-zensical/0.1.3~6a01fb2c", digest = "sha256:be7cd4fcb5c1e7232f5501c515194703203db3d8e488427404737df72e334bd4" }
 
 [tools."pypi:zensical".options]
-python = "3.14.10"
+python = "3.15.2"
 
 [[tools.python]]
-version = "3.14.10"
+version = "3.15.2"
 backend = "core:python"
-specifiers = ["3.14.10"]
+specifiers = ["3.15.2"]
 
 [tools.python."platforms.linux-arm64"]
-checksum = "sha256:90f48337bc3dd4ae6eda81e001e4c981236d403b6b5a07778bbdf94ee423dc00"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"
+checksum = "sha256:dac9832fe240524c092015b99ed76fcef1a32a096d744fcb39eafa980d1a0ffa"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-arm64-musl"]
-checksum = "sha256:d96d9e66e1e4f6465114ed239681bf6e45bca63724453675fd9bdf30a6475873"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-aarch64-unknown-linux-musl-install_only_stripped.tar.gz"
+checksum = "sha256:64786e91bbd687c003c3e6b3dc4a616bc379164dd923f3b38745af650df1eca6"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-aarch64-unknown-linux-musl-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-x64"]
-checksum = "sha256:4d3c16c59ed0802a3d1d34d8bce504b15ceeaff39d62dadecc6a9fa803412aed"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"
+checksum = "sha256:d94bcba1ca1c63f591fa63109c3eeaacc76ee6796844ac7bdf2ae10715646f05"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-x64-musl"]
-checksum = "sha256:f6dc25dc87ec05c1600ff49ad169adcec449b9ca563d274ba143f5e13b41fe42"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-x86_64-unknown-linux-musl-install_only_stripped.tar.gz"
+checksum = "sha256:2f3a1407f26d14938b592de39195e0de78de501268beac14dbc8be3b14b9c6e4"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-x86_64-unknown-linux-musl-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.macos-arm64"]
-checksum = "sha256:95eb8c87d16af37c54e9765e31d8c56c0d8ffa9968ea0f704f73a9b83f84e9f9"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-aarch64-apple-darwin-install_only_stripped.tar.gz"
+checksum = "sha256:2cc8874f034f7a0deff879530020108ebe6d318f5e8c6689673a866ab5fb7fdc"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-aarch64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.macos-x64"]
-checksum = "sha256:2fd8becd48cf0ff5f0a15df3c0db7cae7aa708dcaacf901bd30d6cdd6229370b"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-x86_64-apple-darwin-install_only_stripped.tar.gz"
+checksum = "sha256:f076837c5fb804e6f200841c3be3b2050633f7e19ea97934f81fd9727ada6b71"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-x86_64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.windows-x64"]
-checksum = "sha256:c1876a9795d3a94ee49a1499a69cd91e26ca3e2829593f93fa6e4db90d05402b"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"
-provenance = "github-attestations"
-
-[[tools.uv]]
-version = "0.13.7"
-backend = "aqua:astral-sh/uv"
-specifiers = ["0.13.7"]
-
-[tools.uv."platforms.linux-arm64"]
-checksum = "sha256:71279f8d3c67241e807b9d8db872d1bf541579fb9f08b7d1eb1682196d1e57dc"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009469"
-provenance = "github-attestations"
-
-[tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:2d3ec076a0c4c0e8250bb6418c44080828b544f1a3be0b6e46adf9fb6923de45"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009487"
-provenance = "github-attestations"
-
-[tools.uv."platforms.linux-x64"]
-checksum = "sha256:c5221ff41b7892bfc223543883600125f6a47fe845093e0f5bdff4f359196d83"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009823"
-provenance = "github-attestations"
-
-[tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:287491da03f2a785c70fa75b13e1f849918c2f2b5415fe84876b8214eeb792f9"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009859"
-provenance = "github-attestations"
-
-[tools.uv."platforms.macos-arm64"]
-checksum = "sha256:81b811b57e4624df7ed3aac148e0359100d9962f3d9dce00aec533dc2e086731"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009442"
-provenance = "github-attestations"
-
-[tools.uv."platforms.macos-x64"]
-checksum = "sha256:20c47e4c1f630b8abaff8c291fa9b9aa300fef92c4fbff95adf198b55287cda7"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009775"
-provenance = "github-attestations"
-
-[tools.uv."platforms.windows-x64"]
-checksum = "sha256:0cdc5b38fe5a8168ed6a25814f5ba43c21d313dd3187314fccb37b7cec46e021"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/704009796"
+checksum = "sha256:547cdbb844edc425b235513fdf0267f64e8e59c8f484527bb7ef92d3aad91dd9"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261124/cpython-3.15.2+20261124-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"
 provenance = "github-attestations"
