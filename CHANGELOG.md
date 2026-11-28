@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.11.3 — 2026-11-28
+
+### 🏗️ Build & CI
+
+- Count only the files openspec update adds (`8bd1866`)
+
 ## 2026.11.2 — 2026-11-27
 
 ### 📚 Documentation
