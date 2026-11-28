@@ -64,7 +64,13 @@ jobs:
       # mise puts its pinned shellcheck first on PATH; pyflakes stays off, as no step runs Python.
       - run: mise exec -- actionlint -pyflakes=
       # openspec update rewrites the skills it generates: a bump of openspec must carry them along.
-      - run: mise exec -- openspec update && git add --intent-to-add . && git diff --exit-code
+      # Untracked files that were there before it, as in act's copy of a working tree, don't count.
+      - run: |
+          before=$(git ls-files --others --exclude-standard)
+          mise exec -- openspec update
+          after=$(git ls-files --others --exclude-standard)
+          diff <(echo "$before") <(echo "$after")
+          git diff --exit-code
 
   docs:
     runs-on: ubuntu-24.04
